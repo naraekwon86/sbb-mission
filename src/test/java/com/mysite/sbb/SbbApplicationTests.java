@@ -1,24 +1,37 @@
 package com.mysite.sbb;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @SpringBootTest
 class SbbApplicationTests {
+
   @Autowired
-    private QuestionRepository questionRepository;
+  private QuestionRepository questionRepository;
+
+  @Autowired
+    private AnswerRepository answerRepository;
+  @Transactional
   @Test
     void testJpa(){
-      List<Question> all = this.questionRepository.findAll();
-      assertEquals(2,all.size());
+        Optional<Question> oq = this.questionRepository.findById(6);
+        assertTrue(oq.isPresent());
+        Question q = oq.get();
 
-      Question q = all.get(0);
-      assertEquals("sbb가 무엇인가요?" , q.getSubject());
+        List<Answer> answerList = q.getAnswerList();
+
+        assertEquals(1,answerList.size());
+        assertEquals("네 자동으로 생성됩니다.",answerList.get(0).getContent());
+      }
   }
-}
+
