@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.mysite.sbb.answer.AnswerForm;
 
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
+
 import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/question")
@@ -23,10 +26,10 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @GetMapping("/list")
-    public String list(Model model){
-        List<Question> questionList = this.questionService.getList();
-        model.addAttribute("questionList", questionList);
-        return "question_list";
+    public String list(Model model, @RequestParam(value="page" ,defaultValue = "0")int page){
+     Page<Question> paging = this.questionService.getList(page);
+     model.addAttribute("paging", paging);
+     return "question_list";
     }
 
     @GetMapping(value ="/detail/{id}")
