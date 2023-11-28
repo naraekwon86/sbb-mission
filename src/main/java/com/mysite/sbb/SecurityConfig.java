@@ -12,6 +12,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //x-frame-options
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
+//password encoder 빈
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -21,12 +25,16 @@ public class SecurityConfig {
             .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                     .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
             .csrf((csrf) -> csrf
-                    .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/")))
+                    .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
             .headers((headers) -> headers
                     .addHeaderWriter(new XFrameOptionsHeaderWriter(
                             XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
     ;
     return http.build();
 }
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
 
+    }
 }
