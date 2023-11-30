@@ -13,6 +13,9 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
+//Answer 속성추가
+import com.mysite.sbb.user.SiteUser;
+
 @Getter
 @Setter
 @Entity
@@ -28,5 +31,8 @@ public class Answer {
 
     @ManyToOne
     private Question question;
+    @ManyToOne
+    private SiteUser author;
+
 
 }

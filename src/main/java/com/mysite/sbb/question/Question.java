@@ -11,6 +11,9 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+//Question 속성 추가
+import jakarta.persistence.ManyToOne;
+import com.mysite.sbb.user.SiteUser;
 @Getter
 @Setter
 @Entity
@@ -29,4 +32,6 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+    @ManyToOne
+    private SiteUser author;
 }
