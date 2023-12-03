@@ -2,15 +2,12 @@ package com.mysite.sbb.question;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 import com.mysite.sbb.answer.Answer;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.*;
 import jakarta.persistence.OneToMany;
-
 import lombok.Getter;
 import lombok.Setter;
-
 //Question 속성 추가
 import jakarta.persistence.ManyToOne;
 import com.mysite.sbb.user.SiteUser;
@@ -34,4 +31,5 @@ public class Question {
     private List<Answer> answerList;
     @ManyToOne
     private SiteUser author;
+    private LocalDateTime modifyDate;
 }

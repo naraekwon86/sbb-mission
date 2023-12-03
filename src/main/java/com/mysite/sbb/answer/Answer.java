@@ -33,6 +33,7 @@ public class Answer {
     private Question question;
     @ManyToOne
     private SiteUser author;
+    private LocalDateTime modifyDate;
 
 
 }
