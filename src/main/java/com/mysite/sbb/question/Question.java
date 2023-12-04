@@ -11,6 +11,9 @@ import lombok.Setter;
 //Question 속성 추가
 import jakarta.persistence.ManyToOne;
 import com.mysite.sbb.user.SiteUser;
+//추천
+import java.util.Set;
+import jakarta.persistence.ManyToMany;
 @Getter
 @Setter
 @Entity
@@ -32,4 +35,7 @@ public class Question {
     @ManyToOne
     private SiteUser author;
     private LocalDateTime modifyDate;
+
+    @ManyToMany
+    Set<SiteUser> voter;
 }

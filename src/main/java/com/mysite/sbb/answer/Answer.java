@@ -16,6 +16,10 @@ import lombok.Setter;
 //Answer 속성추가
 import com.mysite.sbb.user.SiteUser;
 
+//추천
+import java.util.Set;
+import jakarta.persistence.ManyToMany;
+
 @Getter
 @Setter
 @Entity
@@ -34,6 +38,8 @@ public class Answer {
     @ManyToOne
     private SiteUser author;
     private LocalDateTime modifyDate;
+    @ManyToMany
+    Set<SiteUser> voter;
 
 
 }
